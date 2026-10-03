@@ -7,7 +7,7 @@
 // Search elements
 const searchForm = document.querySelector("#pokemon-search-form");
 const searchButton = document.querySelector("#pokemon-search-button");
-
+let currentPokemonCry = null;
 // Pokémon card
 const pokemonCard = document.querySelector("#pokemon-card");
 
@@ -19,9 +19,8 @@ const pokemonTypes = document.querySelector("#pokemon-types");
 const pokemonHeight = document.querySelector("#pokemon-height");
 const pokemonWeight = document.querySelector("#pokemon-weight");
 const pokemonAbilities = document.querySelector("#pokemon-abilities");
-const pokemonBaseExperience = document.querySelector(
-    "#pokemon-base-experience"
-);
+const pokemonBaseExperience = document.querySelector("#pokemon-base-experience");
+const pokemonCryButton = document.getElementById("pokemon-cry-button");
 
 // Status messages
 const loadingMessage = document.querySelector("#loading-message");
@@ -38,6 +37,10 @@ searchForm.addEventListener("submit", event => {
     sendData(pokemonUserInput)
 });
 
+
+
+
+
 async function sendData(pokemonUserInput) {
     const response = await fetch(`/pokemon/${pokemonUserInput}`)
     const data = await response.json();
@@ -51,5 +54,12 @@ function updatePokedex(data) {
     pokemonWeight.textContent = data['weight'];
     pokemonAbilities.textContent = data['abilities'];
     pokemonBaseExperience.textContent = data['base_experience'];
-    pokemonImage.src = data['sprites']
+    pokemonImage.src = data['sprites'];
+    currentPokemonCry = data['cries'];
 }
+
+pokemonCryButton.addEventListener("click", () => {
+
+    const pokemonCry = new Audio(currentPokemonCry);
+        pokemonCry.play();
+})

@@ -34,6 +34,7 @@ def create_pokemon_object(pokemon):
     weight = int(pokemon['weight'])  # integer
     base_experience = int(pokemon['base_experience'])
     sprites = pokemon['sprites']['other']['home']['front_default']
+    cries = pokemon['cries']['latest']
     for ability in abilities:  # Each ability names dictionary
         ability_name.append(ability["ability"]["name"])
 
@@ -44,6 +45,7 @@ def create_pokemon_object(pokemon):
         'weight': weight,
         'abilities': ability_name,
         'base_experience': base_experience,
-        'sprites': sprites
+        'sprites': sprites,
+        'cries': cries
     }
     return pokemon_object
